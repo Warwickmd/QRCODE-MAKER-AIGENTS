@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    image: aigents-qr-code-maker
+    container_name: aigents-qr-code-maker
+    ports:
+      - "8080:80"
+    restart: unless-stopped
