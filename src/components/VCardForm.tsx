@@ -22,7 +22,7 @@ function Field({
 }) {
   return (
     <div className={half ? 'col-span-1' : 'col-span-2'}>
-      <label className="block text-xs text-[#666] uppercase tracking-widest mb-1.5 font-medium">
+      <label className="block text-xs text-[#1e40af] uppercase tracking-widest mb-1.5 font-medium">
         {label}
       </label>
       <input
@@ -31,9 +31,9 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="
-          w-full bg-[#111] border border-[#2a2a2a] rounded-lg px-3 py-2.5
-          text-sm text-[#f5f5f5] placeholder-[#444]
-          focus:outline-none focus:border-[#555] focus:bg-[#161616]
+          w-full bg-white border border-[#e2e8f0] rounded-lg px-3 py-2.5
+          text-sm text-[#1e3a5f] placeholder-[#94a3b8]
+          focus:outline-none focus:border-[#3b82f6] focus:bg-[#f8fafc]
           font-mono
         "
       />

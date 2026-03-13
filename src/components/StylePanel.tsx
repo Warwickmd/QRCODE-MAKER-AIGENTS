@@ -9,7 +9,7 @@ interface Props {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-5">
-      <h3 className="text-xs text-[#555] uppercase tracking-widest mb-3 font-medium">{title}</h3>
+      <h3 className="text-xs text-[#64748b] uppercase tracking-widest mb-3 font-medium">{title}</h3>
       {children}
     </div>
   );
@@ -27,7 +27,7 @@ function ColorSwatch({
   return (
     <label className="flex items-center gap-2.5 cursor-pointer group">
       <div
-        className="w-9 h-9 rounded-lg border border-[#333] overflow-hidden flex-shrink-0 group-hover:border-[#555] transition-colors"
+        className="w-9 h-9 rounded-lg border border-[#e2e8f0] overflow-hidden flex-shrink-0 group-hover:border-[#93c5fd] transition-colors"
         style={{ background: value }}
       >
         <input
@@ -38,8 +38,8 @@ function ColorSwatch({
         />
       </div>
       <div>
-        <div className="text-xs text-[#888] font-medium">{label}</div>
-        <div className="text-xs text-[#444] font-mono uppercase">{value}</div>
+        <div className="text-xs text-[#475569] font-medium">{label}</div>
+        <div className="text-xs text-[#94a3b8] font-mono uppercase">{value}</div>
       </div>
     </label>
   );
@@ -94,8 +94,8 @@ export function StylePanel({ style, onChange }: Props) {
                 py-2 px-1 rounded-lg border text-xs font-medium transition-all
                 ${
                   style.dotStyle === ds.id
-                    ? 'border-white bg-white text-black'
-                    : 'border-[#2a2a2a] bg-[#111] text-[#666] hover:border-[#3a3a3a] hover:text-[#aaa]'
+                    ? 'border-[#2563eb] bg-[#2563eb] text-white'
+                    : 'border-[#e2e8f0] bg-white text-[#64748b] hover:border-[#93c5fd] hover:text-[#1e40af]'
                 }
               `}
             >
@@ -117,8 +117,8 @@ export function StylePanel({ style, onChange }: Props) {
                 py-2 px-1 rounded-lg border text-xs font-medium transition-all
                 ${
                   style.cornerStyle === cs.id
-                    ? 'border-white bg-white text-black'
-                    : 'border-[#2a2a2a] bg-[#111] text-[#666] hover:border-[#3a3a3a] hover:text-[#aaa]'
+                    ? 'border-[#2563eb] bg-[#2563eb] text-white'
+                    : 'border-[#e2e8f0] bg-white text-[#64748b] hover:border-[#93c5fd] hover:text-[#1e40af]'
                 }
               `}
             >
@@ -134,8 +134,8 @@ export function StylePanel({ style, onChange }: Props) {
         <div
           onClick={() => fileRef.current?.click()}
           className="
-            border-2 border-dashed border-[#2a2a2a] rounded-xl p-4 text-center cursor-pointer
-            hover:border-[#3a3a3a] hover:bg-[#111] transition-all
+            border-2 border-dashed border-[#e2e8f0] rounded-xl p-4 text-center cursor-pointer
+            hover:border-[#93c5fd] hover:bg-[#f8fafc] transition-all
           "
         >
           {style.logoUrl ? (
@@ -145,16 +145,16 @@ export function StylePanel({ style, onChange }: Props) {
                 alt="Logo"
                 className="w-16 h-16 object-contain rounded-lg"
               />
-              <span className="text-xs text-[#666]">Click to change</span>
+              <span className="text-xs text-[#64748b]">Click to change</span>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2 py-2">
-              <svg className="w-8 h-8 text-[#333]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-8 h-8 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <span className="text-xs text-[#555]">Upload logo</span>
-              <span className="text-xs text-[#333]">PNG, JPG, SVG</span>
+              <span className="text-xs text-[#64748b]">Upload logo</span>
+              <span className="text-xs text-[#94a3b8]">PNG, JPG, SVG</span>
             </div>
           )}
           <input
@@ -168,10 +168,10 @@ export function StylePanel({ style, onChange }: Props) {
         {style.logoUrl && (
           <div className="mt-2 flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[#555]">Logo size: {style.logoSize}%</span>
+              <span className="text-xs text-[#64748b]">Logo size: {style.logoSize}%</span>
               <button
                 onClick={() => onChange({ ...style, logoUrl: null })}
-                className="text-xs text-[#555] hover:text-[#aaa] transition-colors"
+                className="text-xs text-[#64748b] hover:text-[#1e40af] transition-colors"
               >
                 Remove
               </button>
@@ -182,7 +182,7 @@ export function StylePanel({ style, onChange }: Props) {
               max={40}
               value={style.logoSize}
               onChange={(e) => set('logoSize')(Number(e.target.value))}
-              className="w-full accent-white"
+              className="w-full accent-[#2563eb]"
             />
           </div>
         )}
@@ -192,16 +192,16 @@ export function StylePanel({ style, onChange }: Props) {
       <Section title="Scan Label">
         <div className="flex flex-col gap-2.5">
           <div>
-            <label className="block text-xs text-[#666] uppercase tracking-widest mb-1.5">Text</label>
+            <label className="block text-xs text-[#1e40af] uppercase tracking-widest mb-1.5">Text</label>
             <input
               type="text"
               value={style.scanText}
               onChange={(e) => set('scanText')(e.target.value)}
               placeholder="Scan me!"
               className="
-                w-full bg-[#111] border border-[#2a2a2a] rounded-lg px-3 py-2
-                text-sm text-[#f5f5f5] placeholder-[#444]
-                focus:outline-none focus:border-[#555]
+                w-full bg-white border border-[#e2e8f0] rounded-lg px-3 py-2
+                text-sm text-[#1e3a5f] placeholder-[#94a3b8]
+                focus:outline-none focus:border-[#3b82f6]
                 font-mono
               "
             />
@@ -212,12 +212,12 @@ export function StylePanel({ style, onChange }: Props) {
               value={style.scanTextColor}
               onChange={set('scanTextColor')}
             />
-            <label className="flex items-center gap-2 text-xs text-[#666] cursor-pointer ml-auto">
+            <label className="flex items-center gap-2 text-xs text-[#64748b] cursor-pointer ml-auto">
               <input
                 type="checkbox"
                 checked={style.showScanArrow}
                 onChange={(e) => set('showScanArrow')(e.target.checked)}
-                className="accent-white"
+                className="accent-[#2563eb]"
               />
               Show arrow
             </label>

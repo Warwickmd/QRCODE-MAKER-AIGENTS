@@ -7,15 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'ai-black': '#0a0a0a',
-        'ai-dark': '#111111',
-        'ai-card': '#1a1a1a',
-        'ai-border': '#2a2a2a',
-        'ai-muted': '#3a3a3a',
-        'ai-gray': '#888888',
-        'ai-light': '#cccccc',
-        'ai-white': '#f5f5f5',
-        'ai-accent': '#ffffff',
+        'ai-black': '#ffffff',
+        'ai-dark': '#f8fafc',
+        'ai-card': '#f1f5f9',
+        'ai-border': '#e2e8f0',
+        'ai-muted': '#93c5fd',
+        'ai-gray': '#64748b',
+        'ai-light': '#374151',
+        'ai-white': '#1e3a5f',
+        'ai-accent': '#2563eb',
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],

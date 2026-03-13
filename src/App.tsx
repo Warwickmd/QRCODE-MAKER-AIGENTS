@@ -57,13 +57,13 @@ export default function App() {
       : !!whatsapp.phone;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#f5f5f5]">
+    <div className="min-h-screen bg-white text-[#1e3a5f]">
       {/* Header */}
-      <header className="border-b border-[#1a1a1a] bg-[#0a0a0a] sticky top-0 z-50">
+      <header className="border-b border-[#e2e8f0] bg-white sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
-              <svg className="w-5 h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
+            <div className="w-8 h-8 bg-[#2563eb] rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
                 <rect x="2" y="2" width="8" height="8" rx="1" />
                 <rect x="14" y="2" width="8" height="8" rx="1" />
                 <rect x="2" y="14" width="8" height="8" rx="1" />
@@ -74,17 +74,17 @@ export default function App() {
               </svg>
             </div>
             <div>
-              <h1 className="text-sm font-bold tracking-wider text-white uppercase font-mono leading-none">
+              <h1 className="text-sm font-bold tracking-wider text-[#1e3a5f] uppercase font-mono leading-none">
                 Aigents
               </h1>
-              <p className="text-xs text-[#444] font-mono tracking-widest leading-none mt-0.5">
+              <p className="text-xs text-[#64748b] font-mono tracking-widest leading-none mt-0.5">
                 QR CODE MAKER
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs text-[#333] font-mono">v1.0</span>
+            <span className="text-xs text-[#94a3b8] font-mono">v1.0</span>
           </div>
         </div>
       </header>
@@ -93,10 +93,10 @@ export default function App() {
       <main className="max-w-6xl mx-auto px-6 py-8">
         {/* Hero */}
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-white tracking-tight mb-2">
+          <h2 className="text-3xl font-bold text-[#1e3a5f] tracking-tight mb-2">
             Professional QR Code Generator
           </h2>
-          <p className="text-[#444] text-sm font-mono">
+          <p className="text-[#64748b] text-sm font-mono">
             VCARD &nbsp;·&nbsp; WhatsApp &nbsp;·&nbsp; Custom branding &nbsp;·&nbsp; Instant download
           </p>
         </div>
@@ -105,17 +105,17 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px_300px] gap-5 items-start">
 
           {/* ── Column 1: Data entry ── */}
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-2xl overflow-hidden">
+          <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl overflow-hidden">
             {/* Type selector */}
-            <div className="p-5 border-b border-[#1a1a1a]">
-              <p className="text-xs text-[#444] uppercase tracking-widest mb-3 font-mono">
+            <div className="p-5 border-b border-[#e2e8f0]">
+              <p className="text-xs text-[#64748b] uppercase tracking-widest mb-3 font-mono">
                 QR Code Type
               </p>
               <TypeSelector selected={qrType} onChange={setQrType} />
             </div>
 
             {/* Mobile tabs */}
-            <div className="flex border-b border-[#1a1a1a] lg:hidden">
+            <div className="flex border-b border-[#e2e8f0] lg:hidden">
               {(['data', 'style'] as const).map((tab) => (
                 <button
                   key={tab}
@@ -123,8 +123,8 @@ export default function App() {
                   className={`
                     flex-1 py-3 text-xs uppercase tracking-widest font-medium transition-colors
                     ${activeTab === tab
-                      ? 'text-white border-b-2 border-white -mb-px'
-                      : 'text-[#444] hover:text-[#888]'}
+                      ? 'text-[#2563eb] border-b-2 border-[#2563eb] -mb-px'
+                      : 'text-[#94a3b8] hover:text-[#64748b]'}
                   `}
                 >
                   {tab === 'data' ? 'Contact Info' : 'Style'}
@@ -135,7 +135,7 @@ export default function App() {
             {/* Form */}
             <div className="p-5">
               <div className={activeTab === 'data' ? 'block' : 'hidden lg:block'}>
-                <p className="text-xs text-[#333] uppercase tracking-widest font-mono mb-4">
+                <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-4">
                   {qrType === 'vcard' ? '— Contact Information' : '— WhatsApp Link'}
                 </p>
                 {qrType === 'vcard'
@@ -150,22 +150,22 @@ export default function App() {
           </div>
 
           {/* ── Column 2: Style panel (desktop only) ── */}
-          <div className="hidden lg:block bg-[#111111] border border-[#1a1a1a] rounded-2xl p-5">
-            <p className="text-xs text-[#333] uppercase tracking-widest font-mono mb-4">
+          <div className="hidden lg:block bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl p-5">
+            <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-4">
               — Appearance
             </p>
             <StylePanel style={qrStyle} onChange={setQrStyle} />
           </div>
 
           {/* ── Column 3: Preview ── */}
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-2xl p-5">
-            <p className="text-xs text-[#333] uppercase tracking-widest font-mono mb-4">
+          <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl p-5">
+            <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-4">
               — Preview
             </p>
 
             {!hasData && (
-              <div className="text-center py-4 mb-4 border border-dashed border-[#1a1a1a] rounded-xl">
-                <p className="text-xs text-[#333] font-mono">
+              <div className="text-center py-4 mb-4 border border-dashed border-[#e2e8f0] rounded-xl">
+                <p className="text-xs text-[#94a3b8] font-mono">
                   Fill in {qrType === 'vcard' ? 'contact info' : 'a phone number'}<br />
                   to generate your QR code
                 </p>
@@ -179,12 +179,12 @@ export default function App() {
             />
 
             {/* Encoded data inspector */}
-            <div className="mt-5 pt-4 border-t border-[#1a1a1a]">
-              <p className="text-xs text-[#333] uppercase tracking-widest font-mono mb-2">
+            <div className="mt-5 pt-4 border-t border-[#e2e8f0]">
+              <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-2">
                 Encoded content
               </p>
-              <div className="bg-[#0a0a0a] rounded-lg p-3 max-h-24 overflow-y-auto">
-                <pre className="text-xs text-[#333] font-mono whitespace-pre-wrap break-all">
+              <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 max-h-24 overflow-y-auto">
+                <pre className="text-xs text-[#64748b] font-mono whitespace-pre-wrap break-all">
                   {hasData ? qrData : '—'}
                 </pre>
               </div>
@@ -193,11 +193,11 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-6 border-t border-[#1a1a1a] flex items-center justify-between">
-          <p className="text-xs text-[#2a2a2a] font-mono">
+        <footer className="mt-12 pt-6 border-t border-[#e2e8f0] flex items-center justify-between">
+          <p className="text-xs text-[#94a3b8] font-mono">
             AIGENTS QR CODE MAKER
           </p>
-          <p className="text-xs text-[#2a2a2a] font-mono">
+          <p className="text-xs text-[#94a3b8] font-mono">
             Built for professionals
           </p>
         </footer>

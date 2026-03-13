@@ -32,14 +32,14 @@ export function TypeSelector({ selected, onChange }: Props) {
             font-medium text-sm transition-all duration-200
             ${
               selected === t.id
-                ? 'border-white bg-white text-black'
-                : 'border-[#2a2a2a] bg-[#111111] text-[#888888] hover:border-[#3a3a3a] hover:text-[#cccccc]'
+                ? 'border-[#2563eb] bg-[#2563eb] text-white'
+                : 'border-[#e2e8f0] bg-white text-[#64748b] hover:border-[#93c5fd] hover:text-[#1e40af]'
             }
           `}
         >
           <span className="text-2xl">{t.icon}</span>
           <span className="font-semibold tracking-wide text-xs uppercase">{t.label}</span>
-          <span className={`text-xs font-normal ${selected === t.id ? 'text-[#555]' : 'text-[#555]'}`}>
+          <span className={`text-xs font-normal ${selected === t.id ? 'text-[#bfdbfe]' : 'text-[#94a3b8]'}`}>
             {t.desc}
           </span>
         </button>

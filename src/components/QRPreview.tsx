@@ -106,7 +106,7 @@ export function QRPreview({ data, style, label }: Props) {
     <div className="flex flex-col items-center">
       {/* QR card */}
       <div
-        className="relative rounded-2xl overflow-hidden shadow-2xl"
+        className="relative rounded-2xl overflow-hidden shadow-md border border-[#e2e8f0]"
         style={{ background: style.background, padding: '24px 24px 16px' }}
       >
         {/* QR canvas */}
@@ -161,8 +161,8 @@ export function QRPreview({ data, style, label }: Props) {
             onClick={downloadPNG}
             className="
               flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl
-              bg-white text-black font-semibold text-sm
-              hover:bg-[#e5e5e5] active:scale-95 transition-all
+              bg-[#2563eb] text-white font-semibold text-sm
+              hover:bg-[#1d4ed8] active:scale-95 transition-all
             "
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -175,8 +175,8 @@ export function QRPreview({ data, style, label }: Props) {
             onClick={downloadSVG}
             className="
               flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl
-              border border-[#2a2a2a] bg-[#111] text-[#aaa] font-semibold text-sm
-              hover:border-[#444] hover:text-white active:scale-95 transition-all
+              border border-[#e2e8f0] bg-white text-[#1e3a5f] font-semibold text-sm
+              hover:border-[#93c5fd] hover:text-[#1e40af] active:scale-95 transition-all
             "
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
