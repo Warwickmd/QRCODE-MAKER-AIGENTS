@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import type { QRType } from '../types';
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
   onChange: (type: QRType) => void;
 }
 
-const types: { id: QRType; label: string; icon: JSX.Element }[] = [
+const types: { id: QRType; label: string; icon: ReactElement }[] = [
   {
     id: 'url',
     label: 'Enlace',
