@@ -2,29 +2,49 @@ import { useState } from 'react';
 import { TypeSelector } from './components/TypeSelector';
 import { VCardForm } from './components/VCardForm';
 import { WhatsAppForm } from './components/WhatsAppForm';
+import { URLForm } from './components/URLForm';
+import { TextForm } from './components/TextForm';
+import { EmailForm } from './components/EmailForm';
+import { PhoneForm } from './components/PhoneForm';
+import { SMSForm } from './components/SMSForm';
+import { WiFiForm } from './components/WiFiForm';
 import { StylePanel } from './components/StylePanel';
 import { QRPreview } from './components/QRPreview';
-import { buildVCardString, buildWhatsAppString } from './utils/qrData';
-import type { QRType, VCardData, WhatsAppData, QRStyle } from './types';
+import {
+  buildVCardString,
+  buildWhatsAppString,
+  buildURLString,
+  buildTextString,
+  buildEmailString,
+  buildPhoneString,
+  buildSMSString,
+  buildWiFiString,
+} from './utils/qrData';
+import type {
+  QRType,
+  VCardData,
+  WhatsAppData,
+  URLData,
+  TextData,
+  EmailData,
+  PhoneData,
+  SMSData,
+  WiFiData,
+  QRStyle,
+} from './types';
 
 const DEFAULT_VCARD: VCardData = {
-  firstName: '',
-  lastName: '',
-  company: '',
-  title: '',
-  phone: '',
-  mobile: '',
-  email: '',
-  website: '',
-  address: '',
-  city: '',
-  country: '',
+  firstName: '', lastName: '', company: '', title: '',
+  phone: '', mobile: '', email: '', website: '',
+  address: '', city: '', country: '',
 };
-
-const DEFAULT_WHATSAPP: WhatsAppData = {
-  phone: '',
-  message: '',
-};
+const DEFAULT_WHATSAPP: WhatsAppData = { phone: '', message: '' };
+const DEFAULT_URL: URLData = { url: '' };
+const DEFAULT_TEXT: TextData = { text: '' };
+const DEFAULT_EMAIL: EmailData = { to: '', subject: '', body: '' };
+const DEFAULT_PHONE: PhoneData = { phone: '' };
+const DEFAULT_SMS: SMSData = { phone: '', message: '' };
+const DEFAULT_WIFI: WiFiData = { ssid: '', password: '', security: 'WPA', hidden: false };
 
 const DEFAULT_STYLE: QRStyle = {
   foreground: '#000000',
@@ -39,22 +59,71 @@ const DEFAULT_STYLE: QRStyle = {
   showScanArrow: true,
 };
 
+const TYPE_LABELS: Record<QRType, string> = {
+  url: 'Enlace URL',
+  text: 'Texto',
+  email: 'E-mail',
+  phone: 'Llamada',
+  sms: 'SMS',
+  wifi: 'Wi-Fi',
+  vcard: 'V-Card',
+  whatsapp: 'WhatsApp',
+};
+
 export default function App() {
   const [qrType, setQrType] = useState<QRType>('vcard');
   const [vcard, setVcard] = useState<VCardData>(DEFAULT_VCARD);
   const [whatsapp, setWhatsapp] = useState<WhatsAppData>(DEFAULT_WHATSAPP);
+  const [url, setUrl] = useState<URLData>(DEFAULT_URL);
+  const [text, setText] = useState<TextData>(DEFAULT_TEXT);
+  const [email, setEmail] = useState<EmailData>(DEFAULT_EMAIL);
+  const [phone, setPhone] = useState<PhoneData>(DEFAULT_PHONE);
+  const [sms, setSms] = useState<SMSData>(DEFAULT_SMS);
+  const [wifi, setWifi] = useState<WiFiData>(DEFAULT_WIFI);
   const [qrStyle, setQrStyle] = useState<QRStyle>(DEFAULT_STYLE);
   const [activeTab, setActiveTab] = useState<'data' | 'style'>('data');
 
-  const qrData =
-    qrType === 'vcard'
-      ? buildVCardString(vcard)
-      : buildWhatsAppString(whatsapp);
+  function getQRData(): string {
+    switch (qrType) {
+      case 'vcard':    return buildVCardString(vcard);
+      case 'whatsapp': return buildWhatsAppString(whatsapp);
+      case 'url':      return buildURLString(url);
+      case 'text':     return buildTextString(text);
+      case 'email':    return buildEmailString(email);
+      case 'phone':    return buildPhoneString(phone);
+      case 'sms':      return buildSMSString(sms);
+      case 'wifi':     return buildWiFiString(wifi);
+    }
+  }
 
-  const hasData =
-    qrType === 'vcard'
-      ? !!(vcard.firstName || vcard.lastName || vcard.phone || vcard.email)
-      : !!whatsapp.phone;
+  function hasData(): boolean {
+    switch (qrType) {
+      case 'vcard':    return !!(vcard.firstName || vcard.lastName || vcard.phone || vcard.email);
+      case 'whatsapp': return !!whatsapp.phone;
+      case 'url':      return !!url.url;
+      case 'text':     return !!text.text;
+      case 'email':    return !!email.to;
+      case 'phone':    return !!phone.phone;
+      case 'sms':      return !!sms.phone;
+      case 'wifi':     return !!wifi.ssid;
+    }
+  }
+
+  function renderForm() {
+    switch (qrType) {
+      case 'vcard':    return <VCardForm data={vcard} onChange={setVcard} />;
+      case 'whatsapp': return <WhatsAppForm data={whatsapp} onChange={setWhatsapp} />;
+      case 'url':      return <URLForm data={url} onChange={setUrl} />;
+      case 'text':     return <TextForm data={text} onChange={setText} />;
+      case 'email':    return <EmailForm data={email} onChange={setEmail} />;
+      case 'phone':    return <PhoneForm data={phone} onChange={setPhone} />;
+      case 'sms':      return <SMSForm data={sms} onChange={setSms} />;
+      case 'wifi':     return <WiFiForm data={wifi} onChange={setWifi} />;
+    }
+  }
+
+  const qrData = getQRData();
+  const ready = hasData();
 
   return (
     <div className="min-h-screen bg-white text-[#1e3a5f]">
@@ -97,7 +166,7 @@ export default function App() {
             Professional QR Code Generator
           </h2>
           <p className="text-[#64748b] text-sm font-mono">
-            VCARD &nbsp;·&nbsp; WhatsApp &nbsp;·&nbsp; Custom branding &nbsp;·&nbsp; Instant download
+            URL &nbsp;·&nbsp; V-Card &nbsp;·&nbsp; WhatsApp &nbsp;·&nbsp; Wi-Fi &nbsp;·&nbsp; Llamada &nbsp;·&nbsp; Email &nbsp;·&nbsp; SMS &nbsp;·&nbsp; Texto
           </p>
         </div>
 
@@ -109,7 +178,7 @@ export default function App() {
             {/* Type selector */}
             <div className="p-5 border-b border-[#e2e8f0]">
               <p className="text-xs text-[#64748b] uppercase tracking-widest mb-3 font-mono">
-                QR Code Type
+                Tipo de QR
               </p>
               <TypeSelector selected={qrType} onChange={setQrType} />
             </div>
@@ -127,7 +196,7 @@ export default function App() {
                       : 'text-[#94a3b8] hover:text-[#64748b]'}
                   `}
                 >
-                  {tab === 'data' ? 'Contact Info' : 'Style'}
+                  {tab === 'data' ? 'Contenido' : 'Estilo'}
                 </button>
               ))}
             </div>
@@ -136,12 +205,9 @@ export default function App() {
             <div className="p-5">
               <div className={activeTab === 'data' ? 'block' : 'hidden lg:block'}>
                 <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-4">
-                  {qrType === 'vcard' ? '— Contact Information' : '— WhatsApp Link'}
+                  — {TYPE_LABELS[qrType]}
                 </p>
-                {qrType === 'vcard'
-                  ? <VCardForm data={vcard} onChange={setVcard} />
-                  : <WhatsAppForm data={whatsapp} onChange={setWhatsapp} />
-                }
+                {renderForm()}
               </div>
               <div className={activeTab === 'style' ? 'block lg:hidden' : 'hidden'}>
                 <StylePanel style={qrStyle} onChange={setQrStyle} />
@@ -152,7 +218,7 @@ export default function App() {
           {/* ── Column 2: Style panel (desktop only) ── */}
           <div className="hidden lg:block bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl p-5">
             <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-4">
-              — Appearance
+              — Apariencia
             </p>
             <StylePanel style={qrStyle} onChange={setQrStyle} />
           </div>
@@ -160,20 +226,19 @@ export default function App() {
           {/* ── Column 3: Preview ── */}
           <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl p-5">
             <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-4">
-              — Preview
+              — Vista previa
             </p>
 
-            {!hasData && (
+            {!ready && (
               <div className="text-center py-4 mb-4 border border-dashed border-[#e2e8f0] rounded-xl">
                 <p className="text-xs text-[#94a3b8] font-mono">
-                  Fill in {qrType === 'vcard' ? 'contact info' : 'a phone number'}<br />
-                  to generate your QR code
+                  Completa el formulario<br />para generar tu QR
                 </p>
               </div>
             )}
 
             <QRPreview
-              data={hasData ? qrData : 'AIGENTS QR CODE MAKER'}
+              data={ready ? qrData : 'AIGENTS QR CODE MAKER'}
               style={qrStyle}
               label={qrType}
             />
@@ -181,11 +246,11 @@ export default function App() {
             {/* Encoded data inspector */}
             <div className="mt-5 pt-4 border-t border-[#e2e8f0]">
               <p className="text-xs text-[#94a3b8] uppercase tracking-widest font-mono mb-2">
-                Encoded content
+                Contenido codificado
               </p>
               <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 max-h-24 overflow-y-auto">
                 <pre className="text-xs text-[#64748b] font-mono whitespace-pre-wrap break-all">
-                  {hasData ? qrData : '—'}
+                  {ready ? qrData : '—'}
                 </pre>
               </div>
             </div>
@@ -194,12 +259,8 @@ export default function App() {
 
         {/* Footer */}
         <footer className="mt-12 pt-6 border-t border-[#e2e8f0] flex items-center justify-between">
-          <p className="text-xs text-[#94a3b8] font-mono">
-            AIGENTS QR CODE MAKER
-          </p>
-          <p className="text-xs text-[#94a3b8] font-mono">
-            Built for professionals
-          </p>
+          <p className="text-xs text-[#94a3b8] font-mono">AIGENTS QR CODE MAKER</p>
+          <p className="text-xs text-[#94a3b8] font-mono">Built for professionals</p>
         </footer>
       </main>
     </div>
